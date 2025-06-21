@@ -2,6 +2,9 @@
 requires = ["setuptools>=42", "wheel", "pybind11"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+packages = ["ctc_forced_aligner", "modules"]
+
 [project]
 name = "ctc-forced-aligner"
 description = "Text to speech alignment using CTC forced alignment"

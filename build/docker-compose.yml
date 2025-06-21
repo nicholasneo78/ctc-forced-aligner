@@ -1,0 +1,33 @@
+services:
+  local:
+    build:
+      context: ../
+      dockerfile: build/dockerfile
+    container_name: ctc_forced_aligner
+    stdin_open: true
+    tty: true
+    image: ctc_forced_aligner:v0.0.1-torch-2.7.0-cudnn9-cuda12.6
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - $HOME/code/ctc-forced-aligner/:/ctc_forced_aligner
+      - $HOME/datasets/:/datasets
+      - $HOME/models/:/models
+      # - nas:/nas
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 32gb
+
+# mount to nas
+volumes: 
+  nas:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.100.200,nfsvers=4"
+      device: "/volume1/c3_generic"
