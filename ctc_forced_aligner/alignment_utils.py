@@ -218,6 +218,7 @@ def forced_align(
         targets,
         blank,
     )
+
     return paths, scores
 
 
@@ -252,6 +253,7 @@ def get_alignments(
 
     idx_to_token_map = {v: k for k, v in dictionary.items()}
     segments = merge_repeats(path, idx_to_token_map)
+
     return segments, scores, idx_to_token_map[blank_id]
 
 
